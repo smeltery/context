@@ -1,0 +1,29 @@
+{
+  "name": "context",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE",
+  "packageManager": "bun@1.4.2",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "bun run --filter @context/web dev",
+    "build": "bun run --filter @context/web build",
+    "test": "bun test packages/core",
+    "check:markdown": "bun scripts/check-markdown.ts",
+    "check:mermaid": "bun scripts/check-mermaid.ts",
+    "check:doc-links": "bun scripts/check-doc-links.ts",
+    "check:docs": "bun run check:markdown && bun run check:mermaid && bun run check:doc-links",
+    "check:loc-budget": "bun scripts/check-loc-budget.ts",
+    "check:file-sizes": "bun scripts/check-loc-budget.ts",
+    "check:flat-directories": "bun scripts/check-loc-budget.ts",
+    "check:budgets": "bun run check:loc-budget",
+    "check:hygiene": "bun run check:docs && bun run check:budgets",
+    "ci": "bun run test && bun run build && bun run check:hygiene"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "linkedom": "^0.18.12",
+    "markdownlint": "^0.39.0",
+    "mermaid": "^11.12.0",
+    "typescript": "^5.9.2"
+  }
+}

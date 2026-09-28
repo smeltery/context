@@ -1,0 +1,26 @@
+schema-version = "1.13.0"
+
+[install]
+# Bun 1.4.2 is not published for x86_64-darwin in the catalog yet; isolate it
+# so toplevel can stay on an older nixpkgs rev while Bun tracks a newer one.
+bun.pkg-path = "bun"
+bun.version = "1.4.2"
+bun.pkg-group = "bun"
+bun.systems = ["aarch64-darwin", "aarch64-linux", "x86_64-linux"]
+python3.pkg-path = "python3"
+pre-commit.pkg-path = "pre-commit"
+shellcheck.pkg-path = "shellcheck"
+actionlint.pkg-path = "actionlint"
+git.pkg-path = "git"
+gh.pkg-path = "gh"
+jq.pkg-path = "jq"
+bash.pkg-path = "bash"
+
+[hook]
+on-activate = '''
+  echo "context: bun $(bun --version 2>/dev/null || echo n/a)"
+  echo "context: flox ready — bun install && pre-commit install && bun run ci"
+'''
+
+[options]
+systems = ["aarch64-darwin", "x86_64-darwin", "aarch64-linux", "x86_64-linux"]

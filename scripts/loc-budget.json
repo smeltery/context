@@ -1,0 +1,34 @@
+{
+  "default_lines": 250,
+  "files": {
+    "apps/web/src/main.ts": 1000,
+    "apps/web/src/styles.css": 2200,
+    "apps/web/src/dock.ts": 120,
+    "apps/web/index.html": 320,
+    "macos/Sources/Context/DockWindowController.swift": 280,
+    "macos/Sources/Context/DockView.swift": 280
+  },
+  "default_files": 20,
+  "directories": {
+    "apps/web/public/icons": {
+      "limit": 24,
+      "reason": "Dock and widget brand icons for marketing demos"
+    },
+    "docs/assets": {
+      "limit": 12,
+      "reason": "README and docs marketing images"
+    },
+    "macos/Sources/Context": {
+      "limit": 28,
+      "reason": "Dock app modules"
+    },
+    "macos/Sources/ContextCore": {
+      "limit": 16,
+      "reason": "Pure layout and store logic"
+    },
+    "macos/Tests/ContextCoreTests": {
+      "limit": 12,
+      "reason": "Core unit tests"
+    }
+  }
+}

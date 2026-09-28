@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Context — a second dock for your Mac</title>
+<meta name="description" content="Context is a slim second dock for your Mac: apps, links, clipboard history and live widgets for weather, music, system stats and your AI tools.">
+<link rel="canonical" href="https://github.com/smeltery/context">
+<link rel="icon" href="/icon-64.png">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Context">
+<meta property="og:title" content="Context — a second dock for your Mac">
+<meta property="og:description" content="Apps, links and live widgets, always one glance away.">
+<meta property="og:image" content="/og-context.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Context — a second dock for your Mac">
+<meta name="twitter:description" content="Apps, links and live widgets, always one glance away.">
+<link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+</head>
+<body>
+
+
+<header class="topbar">
+  <a class="brand" href="#top"><svg class="mark" id="mark" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="markTile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e8e8ea"/></linearGradient>
+      <linearGradient id="markInk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111113"/><stop offset="1" stop-color="#3a3a3c"/></linearGradient>
+      <clipPath id="markClip"><rect width="1024" height="1024" rx="230"/></clipPath>
+    </defs>
+    <g clip-path="url(#markClip)">
+      <rect width="1024" height="1024" fill="url(#markTile)"/>
+      <g fill="url(#markInk)">
+        <path d="M312 280h400c88 0 160 72 160 160v0c0 88-72 160-160 160H452v104c0 22-18 40-40 40h-60c-22 0-40-18-40-40V320c0-22 18-40 40-40zM452 440h248c22 0 40-18 40-40s-18-40-40-40H452v80z"/>
+        <rect x="280" y="680" width="120" height="64" rx="20"/>
+        <rect x="452" y="680" width="120" height="64" rx="20"/>
+        <rect x="624" y="680" width="120" height="64" rx="20"/>
+      </g>
+    </g>
+  </svg>Context</a>
+  <nav class="topnav" id="primaryNav" aria-label="Primary">
+    <a href="#shortcuts">Features</a>
+    <a href="#custom">Customize</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#faq">FAQ</a>
+    <a href="#buy">Download</a>
+    <a href="https://github.com/smeltery/context/releases/latest">Download</a>
+  </nav>
+  <a class="btn btn--small" href="https://github.com/smeltery/context/releases/latest">Get Context</a>
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="primaryNav"><i></i><i></i></button>
+</header>
+
+<main id="top">
+  <section class="zoom" id="zoom" aria-label="Context, up close">
+    <div class="stage" id="stage">
+      <div class="viewport-frame" id="viewportFrame" aria-hidden="true"></div>
+      <div class="world" id="world">
+        <div class="shadow"></div>
+        <div class="feet"></div>
+        <div class="hinge"></div>
+        <div class="base"></div>
+        <div class="lid"><div class="bezel">
+          <div class="display" id="display">
+            <div class="notch">
+              <svg class="notch-shape" viewBox="0 0 200 32" aria-hidden="true" focusable="false"><path d="M0 0H200C195.582 0 192 3.582 192 8V20A12 12 0 0 1 180 32H20A12 12 0 0 1 8 20V8C8 3.582 4.418 0 0 0Z"/></svg>
+              <i></i>
+            </div>
+            <div class="menubar" aria-hidden="true">
+              <div class="l"><span><b>Finder</b></span><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span></div>
+              <div class="r"><span>Mon 21 Sep</span><span>11:18</span></div>
+            </div>
+            <div class="macdock" id="macdock" aria-hidden="true"></div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="hero-copy" id="hero">
+        <h1>A second dock for everything you keep checking.</h1>
+        <p class="lede">Context sits on the edge of your screen with your apps, links, clipboard history and small live widgets for weather, music, system stats and your AI tools.</p>
+        <a class="btn" href="https://github.com/smeltery/context/releases/latest">Get Context</a>
+        <p class="fine">Open source. macOS 15 or later.</p>
+      </div>
+      <p class="hint" id="hint">Scroll to look closer</p>
+
+      <div class="caption-shade" id="captionShade" aria-hidden="true"></div>
+      <div id="stops"></div>
+
+      <div class="outro" id="outro"><h2>Up to twelve apps, links and widgets.<br>Always one glance away.</h2></div>
+    </div>
+  </section>
+
+  <section class="static wrap" id="static" aria-label="Features"></section>
+
+
+  <div class="uc wrap">
+  <section class="sec" id="clipboard" aria-labelledby="clipboard-h">
+    <div class="sec-head">
+      <h2 id="clipboard-h">Copied earlier. Ready when you need it.</h2>
+      <p>Clipboard History keeps the text, links, images and files you copy within reach. Search your history, check the preview and copy an entry back to the app you were using.</p>
+    </div>
+    <div class="clip-layout">
+      <div class="clip-stage">
+      <div class="surf clip-window" id="clipWindow" role="group" aria-label="Clipboard History, with sample entries">
+        <div class="clip-search">
+          <input id="clipSearch" type="search" placeholder="Type to filter entries…" aria-label="Filter entries" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-controls="clipList">
+          <label class="clip-type"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M5 3.5h7M5 7h7M5 10.5h7M2 3.5h.01M2 7h.01M2 10.5h.01"/></svg><select id="clipType" aria-label="Type"><option value="">All Types</option><option value="text">Text</option><option value="link">Links</option><option value="image">Images</option><option value="file">Files</option></select><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></label>
+        </div>
+        <div class="clip-body">
+          <div class="clip-col">
+            <div class="clip-list" id="clipList" role="listbox" aria-label="Entries" tabindex="0" data-lenis-prevent></div>
+            <p class="clip-empty" id="clipEmpty" hidden>No matching entries.</p>
+          </div>
+          <div class="clip-detail" id="clipDetail"></div>
+        </div>
+        <div class="clip-footer">
+          <span class="clip-pill clip-name-pill"><img src="/icons/clipboard.svg" alt="" width="20" height="20">Clipboard History<span class="tnum" id="clipCount"></span></span>
+          <span class="clip-pill clip-actions"><button type="button" id="clipCopy" aria-keyshortcuts="Enter">Copy to Clipboard<span class="clip-keys" aria-hidden="true"><kbd>↩</kbd></span></button><i aria-hidden="true"></i><button type="button" id="clipDelete" aria-keyshortcuts="Meta+Backspace">Delete<span class="clip-keys" aria-hidden="true"><kbd>⌘</kbd><kbd>⌫</kbd></span></button></span>
+        </div>
+        <p class="clip-sr" id="clipStatus" role="status"></p>
+      </div>
+      </div>
+      <div class="clip-notes">
+        <div><h3>Find the right copy.</h3><p>Filter by text or type. Thumbnails and website icons help you spot what you need.</p></div>
+        <div><h3>Keep your place.</h3><p>Open history with a shortcut, move with the arrow keys and press Return to copy. Then paste in your previous app.</p></div>
+        <div><h3>There after a restart.</h3><p>History is saved on your Mac. Keep up to 200 entries, including your latest 12 copied images.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="sec" id="shortcuts" aria-labelledby="sc-h">
+    <div class="sec-head">
+      <h2 id="sc-h">A shortcut for everything.</h2>
+      <p>Give any app, link or widget its own keys. They work from any app, even while the dock is hidden, and need no Accessibility or Input Monitoring access.</p>
+    </div>
+    <div class="sc">
+      <div class="sc-hero">
+        <div class="sc-stage" id="scStage" aria-hidden="true">
+          <div class="sc-menubar"><b id="scApp">Finder</b><span>File</span><span>Edit</span><span>View</span><span>Window</span><span class="r">Mon 11:18</span></div>
+          <div class="sc-win" id="scWin"><div class="bar"><i></i><i></i><i></i><span class="url">apple.com/mac</span></div><div class="page"><b></b><s style="width:86%"></s><s style="width:70%"></s><div class="img"></div></div></div>
+          <div class="sc-dock" id="scDock"></div>
+          <div class="surf sc-card" id="scCard"><div class="hrow"><div><div class="ctitle">Milan</div><div class="mut">Sunny · H 29° L 18°</div></div><div style="font-size:32px;font-weight:300;letter-spacing:-.02em">27°</div></div><div class="hours" style="grid-template-columns:repeat(5,1fr)"><span>12<b>27°</b></span><span>13<b>28°</b></span><span>14<b>29°</b></span><span>15<b>29°</b></span><span>16<b>28°</b></span></div></div>
+          <div class="sc-hud" id="scHud"></div>
+        </div>
+        <ol class="sc-steps" id="scSteps" aria-label="What a shortcut does"></ol>
+      </div>
+      <div>
+        <div class="vis" aria-hidden="true"><div class="rec" id="scRec"></div></div>
+        <h3>Record it in one go.</h3>
+        <p>Right-click an item and choose Assign Shortcut. The keys appear as you press them, and Context tells you if macOS or another item already uses them.</p>
+      </div>
+      <div>
+        <div class="vis" aria-hidden="true"><div class="sclist" id="scList"></div></div>
+        <h3>Every shortcut in one list.</h3>
+        <p>Settings → Items shows each shortcut beside its item. A warning marks one that another app has taken; click it to pick new keys.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="stats" aria-labelledby="stats-h">
+    <div class="sec-head">
+      <h2 id="stats-h">Stats, in the dock and in a window.</h2>
+      <p>The dock shows the numbers you choose. Click them for the full picture of your Mac: nine sections, refreshed every 1, 2 or 5 seconds, paused whenever you like.</p>
+    </div>
+    <div class="stats-row">
+      <div class="surf statswin" role="group" aria-label="Stats window">
+        <nav class="side" aria-label="Stats sections" id="statsNav">
+          <div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>
+        </nav>
+        <div class="main" id="statsMain"></div>
+      </div>
+      <div class="indicators">
+        <div class="pair">
+          <div id="statsCellA"></div>
+          <ul class="check" id="statsChecks" aria-label="Indicators in the dock"></ul>
+        </div>
+        <p class="note">Pick one or more. Fewer metrics make the widget shorter. RAM is working memory; SSD is used space on the startup disk.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="widgets" aria-labelledby="widgets-h">
+    <div class="sec-head">
+      <h2 id="widgets-h">Every widget opens a card.</h2>
+      <p>Hover a widget in the dock and its card slides out, with the controls inside it. Click Clipboard, Stats or your AI widgets to open their full window.</p>
+    </div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+
+  <section class="sec" id="arrange" aria-labelledby="arrange-h">
+    <div class="sec-head">
+      <h2 id="arrange-h">Arrange it by hand.</h2>
+      <p>No setup screens needed. Everything happens by dragging, right on the dock. Settings has the same controls if you prefer a list.</p>
+    </div>
+    <div class="arr" id="arr"></div>
+  </section>
+
+  <section class="sec" id="custom" aria-labelledby="custom-h">
+    <div class="sec-head">
+      <h2 id="custom-h">Make it yours.</h2>
+      <p>Where it sits, how it shows up and what it is made of, all from Settings → Appearance.</p>
+    </div>
+    <div class="cust" id="cust"></div>
+  </section>
+
+  <section class="sec" id="privacy" aria-labelledby="priv-h">
+    <div class="sec-head">
+      <h2 id="priv-h">Private by design.</h2>
+      <p>Context works on your Mac. It contacts Polar to verify your license and checks for app updates. Widget polling runs only while the widget is in use.</p>
+    </div>
+    <dl class="priv">
+      <div><dt>No telemetry</dt><dd>There is no analytics endpoint. Stats reads your hardware directly and never terminates processes.</dd></div>
+      <div><dt>Your AI work stays yours</dt><dd>AI Usage and AI Activity never read conversations, prompts or generated code. Optional API keys are saved in Context’s own Keychain entry.</dd></div>
+      <div><dt>Your clipboard stays on your Mac</dt><dd>History is saved locally while the Clipboard widget is in your dock. Clear History or remove the widget to delete it. Copies marked private by password managers are skipped. Website icons and selected link previews contact the relevant websites.</dd></div>
+      <div><dt>Nothing typed is recorded</dt><dd>Keyboard Cleaner only blocks keys while cleaning, and the lock is never saved.</dd></div>
+      <div><dt>You grant each permission</dt><dd>Location, Bluetooth, paste access, Automation for Spotify or Music and Accessibility are asked for only when you add the widget that uses them.</dd></div>
+    </dl>
+  </section>
+  </div>
+
+  <section class="faq wrap" id="faq" aria-labelledby="faq-h">
+    <h2 id="faq-h">Frequently asked questions.</h2>
+    <dl>
+      <div><dt>What is Context?</dt><dd>A second dock for the edge of your Mac. It keeps apps, web links and live widgets in reach while you work.</dd></div>
+      <div><dt>Which Macs can run it?</dt><dd>Context requires macOS 15 or later.</dd></div>
+      <div><dt>What can I put in the dock?</dt><dd>Up to twelve apps, links and widgets. Widgets include clipboard history, weather, a Mini Player, Bluetooth, Stats, AI Usage and AI Activity.</dd></div>
+      <div><dt>Does clipboard history survive a restart?</dt><dd>Yes. Text, links and images are saved locally; file entries point to their original files. History keeps up to 200 entries, including the newest 12 copied images. Clear History or removing the Clipboard widget deletes the saved history.</dd></div>
+      <div><dt>Can I open things from the keyboard?</dt><dd>Yes. Give any app, link or widget a shortcut from its right-click menu or Settings → Items. Shortcuts work from any app, and Context needs no Accessibility or Input Monitoring access for them.</dd></div>
+      <div><dt>Is Context free?</dt><dd>Yes for personal use under PolyForm Shield. See LICENSE for commercial limits.</dd></div>
+      <div><dt>Does Context read my AI conversations?</dt><dd>No. AI Usage and AI Activity do not read conversations, prompts or generated code. Optional API keys are stored in Context’s own Keychain entry.</dd></div>
+      <div><dt>When does Context ask for permissions?</dt><dd>Only when you add a widget that needs them, such as paste access for clipboard history, Location for weather, Bluetooth, Automation for music or Accessibility for Keyboard Cleaner.</dd></div>
+    </dl>
+  </section>
+
+  <section class="price wrap" id="buy" aria-labelledby="price-h">
+    <h2 id="price-h">Open source. Yours to keep.</h2>
+    <div class="price-grid">
+      <p class="amount">Free</p>
+      <div>
+        <ul>
+          <li>One payment in USD, no subscription</li>
+          <li>One license for up to 3 Macs</li>
+          <li>Automatic app updates</li>
+          <li>Every widget included</li>
+          <li>macOS 15 or later</li>
+        </ul>
+        <a class="btn" href="https://github.com/smeltery/context/releases/latest">Get Context</a>
+        <p style="margin-top:16px;font-size:14px;line-height:1.6">Already purchased? <a href="https://github.com/smeltery/context">Find your license or manage your Macs</a>.</p>
+        <p id="download-status" style="margin-top:12px;font-size:14px;line-height:1.6"><a href="https://github.com/smeltery/context/releases/latest">Download Context for Mac</a> · macOS 15 or later · Apple silicon and Intel.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap"><span>Context for macOS</span><a href="https://github.com/smeltery/context">License &amp; device management</a><span>Weather data from Apple Weather.</span><span>Made by <a href="https://github.com/smeltery" rel="author">Emanuele Di Pietro</a></span></footer>
+</main>
+
+
+
+
+
+
+
+
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

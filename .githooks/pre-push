@@ -1,0 +1,23 @@
+#!/bin/sh
+# Pre-push hook: run the same checks CI runs so we never push a red commit.
+# Enable once per clone with:
+#
+#     git config core.hooksPath .githooks
+#
+# Bypass in a pinch with `git push --no-verify`.
+set -e
+
+run() {
+  echo "▶ pre-push: $*"
+  "$@"
+}
+
+run bash scripts/check-docs.sh
+run bash scripts/check-hygiene.sh
+run bash scripts/check-node.sh
+
+if command -v swift >/dev/null 2>&1; then
+  run sh -c 'cd macos && swift build --product ContextCore && swift run ContextCoreSmoke'
+fi
+
+echo "✓ pre-push checks passed"

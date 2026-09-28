@@ -1,0 +1,29 @@
+repos:
+  - repo: local
+    hooks:
+      - id: docs
+        name: markdown and mermaid
+        entry: bash scripts/check-docs.sh
+        language: system
+        pass_filenames: false
+      - id: hygiene
+        name: budgets, shellcheck, and actionlint
+        entry: bash scripts/check-hygiene.sh
+        language: system
+        pass_filenames: false
+      - id: node
+        name: tests and web build
+        entry: bash scripts/check-node.sh
+        language: system
+        pass_filenames: false
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-yaml
+        args: ["--unsafe"]
+      - id: check-added-large-files
+        args: ["--maxkb=5000"]
