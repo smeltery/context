@@ -126,7 +126,7 @@ await loadLenis().catch(() => {
   const lenis = new Lenis({ autoRaf: true, anchors: true, lerp: 0.06 });
   const BASE = '/icons/';
   const STOPS = [
-    { ids: ['synara', 'chatgpt'], mul: .8, h: 'Your apps, one click away.', p: 'Keep the apps you use most on the side of the screen. A dot means the app is running.' },
+    { ids: ['safari', 'chatgpt'], mul: .8, h: 'Your apps, one click away.', p: 'Keep the apps you use most on the side of the screen. A dot means the app is running.' },
     { ids: ['figma'], mul: 1, h: 'Here for an hour, then gone.', p: 'Drag apps or web addresses onto the dock, up to twelve items. Hold Option as you drop and the item is temporary: it counts down and removes itself after 60 minutes, or a time you choose.' },
     { ids: ['github'], mul: 1, h: 'Links, with their own icons.', p: 'Drop any web address to keep it with its site icon. Click to open it, or copy the link from its menu.' },
     { ids: ['player'], mul: 1, h: 'Music, without switching apps.', p: 'The Mini Player follows Spotify or Music. Click it to play or pause, or open its card to seek through the track and change the volume.' },
@@ -160,11 +160,11 @@ await loadLenis().catch(() => {
   const md = document.getElementById('macdock');
   ['finder', 'safari', 'mail', 'messages', 'notes', 'calendar', 'photos', 'music', '|', 'spotify', 'figma', 'ghostty', 'xcode'].forEach((n) => {
     if (n === '|') { md.appendChild(document.createElement('i')); return; }
-    const im = document.createElement('img'); im.src = BASE + n + '.avif'; im.alt = ''; md.appendChild(im);
+    const im = document.createElement('img'); im.src = BASE + n + '.png'; im.alt = ''; md.appendChild(im);
   });
 
   const ITEMS = ContextDock.DEFAULT.slice();
-  ITEMS.splice(ITEMS.findIndex((i) => i.id === 'chatgpt') + 1, 0, { type: 'app', id: 'figma', icon: 'figma.avif', name: 'Figma, temporary', minutes: 60 });
+  ITEMS.splice(ITEMS.findIndex((i) => i.id === 'chatgpt') + 1, 0, { type: 'app', id: 'figma', icon: 'figma.png', name: 'Figma, temporary', minutes: 60 });
   const byId = (id) => ITEMS.find((x) => x.id === id);
   const dock = ContextDock.render({ base: BASE, items: ITEMS });
   display.appendChild(dock);
@@ -421,7 +421,7 @@ await loadLenis().catch(() => {
     Battery: rows([['Charge', '82%', 82], ['Maximum capacity', '91%', 91], ['Cycle count', '312'], ['Time remaining', '6 h 40 min'], ['Power', '8.4 W']]),
     Sensors: rows([['CPU die', '58 °C', 58], ['GPU', '51 °C', 51], ['SSD', '41 °C', 41], ['Left fan', '1,840 rpm'], ['System power', '14.2 W'], ['Battery voltage', '12.6 V']]),
     Processes: `<div class="tablewrap"><table class="proc"><thead><tr><th>Process</th><th>CPU</th><th>Memory</th><th>Disk I/O</th></tr></thead><tbody>
-      ${[['figma.avif', 'Figma', '18.2%', '1.9 GB', '1.2 MB/s'], ['safari.avif', 'Safari', '9.4%', '1.4 GB', '240 KB/s'], ['chatgpt.avif', 'ChatGPT', '6.1%', '820 MB', '80 KB/s'], ['xcode.avif', 'Xcode', '4.8%', '2.6 GB', '3.4 MB/s'], ['spotify.avif', 'Spotify', '2.2%', '410 MB', '60 KB/s']]
+      ${[['figma.png', 'Figma', '18.2%', '1.9 GB', '1.2 MB/s'], ['safari.png', 'Safari', '9.4%', '1.4 GB', '240 KB/s'], ['chatgpt.png', 'ChatGPT', '6.1%', '820 MB', '80 KB/s'], ['xcode.png', 'Xcode', '4.8%', '2.6 GB', '3.4 MB/s'], ['spotify.png', 'Spotify', '2.2%', '410 MB', '60 KB/s']]
         .map(([i, n, c, m, d]) => `<tr><td><img loading="lazy" src="${BASE}${i}" alt="">${n}</td><td class="tnum">${c}</td><td class="tnum">${m}</td><td class="tnum">${d}</td></tr>`).join('')}
     </tbody></table></div><p class="mut" style="margin:10px 0 0;font-size:12px">Top 30 by CPU, memory or disk. Stats never ends a process.</p>`,
   };
@@ -462,14 +462,14 @@ await loadLenis().catch(() => {
   const CARDS = [
     { item: { type: 'player', id: 'player', name: 'Mini Player' }, h: 'Mini Player',
       span: 2, p: 'Spotify or Music, whichever is playing. Play, pause, seek and set the volume.',
-      card: `<div class="hrow" style="justify-content:flex-start;gap:12px"><img loading="lazy" src="${BASE}spotify.avif" alt="" width="40" height="40"><div><div class="ctitle">Spotify</div><div class="mut">Playback controls</div></div></div>
+      card: `<div class="hrow" style="justify-content:flex-start;gap:12px"><img loading="lazy" src="${BASE}spotify.png" alt="" width="40" height="40"><div><div class="ctitle">Spotify</div><div class="mut">Playback controls</div></div></div>
         <div class="track"><i style="width:34%"></i></div><div class="hrow mut tnum" style="font-size:11px"><span>1:12</span><span>3:31</span></div>
         <div class="ctls"><button class="ctl" aria-label="Previous track"><svg viewBox="0 0 20 20"><path d="M4 4h2v12H4zM16 4v12L7 10z"/></svg></button><button class="ctl" id="playBtn" aria-label="Play">${PLAY}</button><button class="ctl" aria-label="Next track"><svg viewBox="0 0 20 20"><path d="M14 4h2v12h-2zM4 4v12l9-6z"/></svg></button></div>
         <div class="vol"><svg viewBox="0 0 16 16"><path d="M2 6h3l4-3v10l-4-3H2z"/></svg><div class="track"><i style="width:62%"></i></div></div>` },
-    { item: { type: 'weather', id: 'weather', temp: 27, name: 'Weather' }, h: 'Weather',
+    { item: { type: 'weather', id: 'weather', temp: 68, name: 'Weather' }, h: 'Weather',
       span: 2, p: 'Where you are or any city, in °C or °F, from Apple Weather.',
-      card: `<div class="hrow"><div><div class="ctitle">Milan</div><div class="mut">Sunny · H 29° L 18°</div></div><div style="font-size:34px;font-weight:300;letter-spacing:-.02em">27°</div></div>
-        <div class="hours">${[['12', 27], ['13', 28], ['14', 29], ['15', 29], ['16', 28], ['17', 26]].map(([h, t]) => `<span>${h}<b>${t}°</b></span>`).join('')}</div>
+      card: `<div class="hrow"><div><div class="ctitle">New York</div><div class="mut">Partly sunny · H 70° L 58°</div></div><div style="font-size:34px;font-weight:300;letter-spacing:-.02em">68°</div></div>
+        <div class="hours">${[['12', 66], ['13', 68], ['14', 70], ['15', 70], ['16', 69], ['17', 67]].map(([h, t]) => `<span>${h}<b>${t}°</b></span>`).join('')}</div>
         <div class="mut" style="font-size:11px;margin-top:12px">Updated 4 min ago · Apple Weather</div>` },
     { item: { type: 'bluetooth', id: 'bluetooth', count: 1, name: 'Bluetooth' }, h: 'Bluetooth',
       span: 2, p: 'See what’s connected and disconnect it, after a quick check.',
@@ -489,7 +489,7 @@ await loadLenis().catch(() => {
       span: 3, p: 'Codex and Claude Code sessions that are running or waiting for you.',
       card: `<div class="ctitle" style="margin-bottom:4px">AI Activity</div>
         <div class="sess"><span class="dot"></span><div><div>Refactor dock layout</div><div class="mut"><img loading="lazy" src="${BASE}openai.svg" alt="">Codex · lateraldock · running</div></div></div>
-        <div class="sess"><span class="dot wait"></span><div><div>Write pricing copy</div><div class="mut"><img loading="lazy" src="${BASE}claude.svg" alt="">Claude Code · context-website · waiting</div></div></div>` },
+        <div class="sess"><span class="dot wait"></span><div><div>Write download copy</div><div class="mut"><img loading="lazy" src="${BASE}claude.svg" alt="">Claude Code · context-website · waiting</div></div></div>` },
   ];
   const cards = $('cards');
   CARDS.forEach((c) => {
@@ -517,7 +517,7 @@ await loadLenis().catch(() => {
     else btArea.innerHTML = btIdle;
   });
   // AI usage used/left
-  const PROV = [['claude.svg', 'Claude Code', 98], ['openai.svg', 'Codex', 89], ['cursor.avif', 'Cursor', 64]];
+  const PROV = [['claude.svg', 'Claude Code', 98], ['openai.svg', 'Codex', 89], ['cursor.png', 'Cursor', 64]];
   const sw = $('leftSw'), prov = $('prov');
   const drawProv = () => {
     const left = sw.getAttribute('aria-checked') === 'true';
@@ -536,10 +536,10 @@ await loadLenis().catch(() => {
   // Hero: each step presses its keys in the overlay, then the screen reacts.
   const scStage = $('scStage'), scDock = $('scDock'), scCard = $('scCard'), scWin = $('scWin'), scHud = $('scHud'), scApp = $('scApp');
   scDock.appendChild(mini([
-    { type: 'app', id: 'sc-safari', icon: 'safari.avif', running: true },
+    { type: 'app', id: 'sc-safari', icon: 'safari.png', running: true },
     { type: 'link', id: 'sc-gh', icon: 'github.svg', invert: true },
     { type: 'divider' },
-    { type: 'weather', id: 'sc-weather', temp: 27 },
+    { type: 'weather', id: 'sc-weather', temp: 68 },
     { type: 'player', id: 'sc-player' },
     { type: 'bluetooth', id: 'sc-bt', count: 1 },
     { type: 'clipboard', id: 'sc-clip' },
@@ -605,7 +605,7 @@ await loadLenis().catch(() => {
   const scRec = $('scRec');
   const CHECK = '<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="#34c759"/><path d="M4.6 8.2l2.2 2.2 4.6-4.8" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const WARN = '<svg viewBox="0 0 16 16"><path d="M8 1.2l7 12.6H1z" fill="#ff8c80"/><path d="M8 6v3.6" stroke="#333" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.8" r=".95" fill="#333"/></svg>';
-  scRec.innerHTML = `<i class="close"></i><div class="hd"><span class="ic"><img loading="lazy" src="${BASE}safari.avif" alt=""></span><div><b>Safari</b><span>Choose keys that open it from any app.</span></div></div><div class="well"></div><div class="st"></div><div class="ft"><span>Cancel</span><span class="save off">Save</span></div>`;
+  scRec.innerHTML = `<i class="close"></i><div class="hd"><span class="ic"><img loading="lazy" src="${BASE}safari.png" alt=""></span><div><b>Safari</b><span>Choose keys that open it from any app.</span></div></div><div class="well"></div><div class="st"></div><div class="ft"><span>Cancel</span><span class="save off">Save</span></div>`;
   const well = scRec.querySelector('.well'), st = scRec.querySelector('.st'), save = scRec.querySelector('.save');
   const status = (kind, text) => { st.className = 'st ' + kind; st.innerHTML = (kind === 'ok' ? CHECK : kind === 'bad' ? WARN : '') + `<span>${text}</span>`; save.classList.toggle('off', kind !== 'ok'); };
   const idle = () => { well.innerHTML = '<em>Type a shortcut</em>'; status('idle', 'Use ⌘, ⌥ or ⌃ with any key, or an F-key on its own.'); };
@@ -635,10 +635,10 @@ await loadLenis().catch(() => {
   const BTI = '<svg viewBox="0 0 22 22"><rect width="22" height="22" rx="5.5" fill="#3d8cff"/><path d="M7 7.6l8 7-4 3.6V3.8l4 3.6-8 7" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
   const WARNI = '<svg class="warn" viewBox="0 0 16 16"><path d="M8 1.2l7 12.6H1z" fill="#ff9f0a"/><path d="M8 6v3.6" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/><circle cx="8" cy="11.8" r=".95" fill="#fff"/></svg>';
   const ROWS = [
-    [`<img loading="lazy" src="${BASE}safari.avif" alt="">`, 'Safari', 'App', ['⌥', '⌘', 'S']],
+    [`<img loading="lazy" src="${BASE}safari.png" alt="">`, 'Safari', 'App', ['⌥', '⌘', 'S']],
     [`<img loading="lazy" src="${BASE}github.svg" alt="">`, 'github.com', 'Link', ['⌃', '⌥', 'G']],
     [SUN, 'Weather', 'Widget', ['⌥', '⌘', 'W']],
-    [`<img loading="lazy" src="${BASE}spotify.avif" alt="">`, 'Mini Player', 'Widget', ['⌘', 'F5'], true],
+    [`<img loading="lazy" src="${BASE}spotify.png" alt="">`, 'Mini Player', 'Widget', ['⌘', 'F5'], true],
     [BTI, 'Bluetooth', 'Widget', null],
     [`<img loading="lazy" src="${BASE}clipboard.svg" alt="">`, 'Clipboard', 'Widget', ['⌃', '⌥', 'V']],
   ];
@@ -647,13 +647,13 @@ await loadLenis().catch(() => {
   /* ---------- arrange ---------- */
   const ARR = [
     { h: 'Drag to add', p: 'Drop app bundles or http(s) links on the dock, several at once. Duplicates are skipped. Up to 12 apps, links and widgets.',
-      vis: (v) => { v.innerHTML = `<img loading="lazy" class="ghost" src="${BASE}chatgpt.avif" alt=""><span class="urlchip"><img loading="lazy" src="${BASE}github.svg" alt="">github.com</span>`; } },
+      vis: (v) => { v.innerHTML = `<img loading="lazy" class="ghost" src="${BASE}chatgpt.png" alt=""><span class="urlchip"><img loading="lazy" src="${BASE}github.svg" alt="">github.com</span>`; } },
     { h: 'Temporary items', p: 'Hold Option while you drop and the item leaves after 60 minutes. Pick another preset, a custom time, or Keep Permanently.',
-      vis: (v) => { v.innerHTML = '<span class="key">⌥</span><span style="color:#9a9a9a">+ drop</span>'; v.appendChild(mini([{ type: 'app', id: 't', icon: 'figma.avif', name: 'Figma', minutes: 60 }], 1.6)); } },
+      vis: (v) => { v.innerHTML = '<span class="key">⌥</span><span style="color:#9a9a9a">+ drop</span>'; v.appendChild(mini([{ type: 'app', id: 't', icon: 'figma.png', name: 'Figma', minutes: 60 }], 1.6)); } },
     { h: 'Dividers', p: 'Split the dock into groups with a slim line. Up to 11 dividers, and they never take an item slot.',
-      vis: (v) => { v.appendChild(mini([{ type: 'app', id: 'a', icon: 'safari.avif' }, { type: 'divider' }, { type: 'app', id: 'b', icon: 'notes.avif' }], 1.1)); } },
+      vis: (v) => { v.appendChild(mini([{ type: 'app', id: 'a', icon: 'safari.png' }, { type: 'divider' }, { type: 'app', id: 'b', icon: 'notes.png' }], 1.1)); } },
     { h: 'Drag to reorder', p: 'Drag any item or divider along the dock and release to save the order. Release outside the dock to cancel.',
-      vis: (v) => { const d = mini([{ type: 'app', id: 'a', icon: 'music.avif' }, { type: 'app', id: 'b', icon: 'notion.avif' }, { type: 'app', id: 'c', icon: 'ghostty.avif' }], 1); d.children[1].style.cssText = 'transform:translate(34px,-6px) rotate(-6deg) scale(1.12);filter:drop-shadow(0 10px 14px rgba(0,0,0,.22));z-index:2'; v.appendChild(d); } },
+      vis: (v) => { const d = mini([{ type: 'app', id: 'a', icon: 'music.png' }, { type: 'app', id: 'b', icon: 'notion.png' }, { type: 'app', id: 'c', icon: 'ghostty.png' }], 1); d.children[1].style.cssText = 'transform:translate(34px,-6px) rotate(-6deg) scale(1.12);filter:drop-shadow(0 10px 14px rgba(0,0,0,.22));z-index:2'; v.appendChild(d); } },
   ];
   const arr = $('arr');
   ARR.forEach((a) => {
@@ -671,7 +671,7 @@ await loadLenis().catch(() => {
     { h: 'Any edge', p: 'Left, right or bottom. Hover cards open inward, and dividers work on every edge.',
       vis: cap('<span class="scr l"><i></i></span>', 'Left') + cap('<span class="scr r"><i></i></span>', 'Right') + cap('<span class="scr b"><i></i></span>', 'Bottom') },
     { h: 'Dock or pill', p: 'Always visible like the macOS Dock, hidden until you reach the edge, or a small pill that opens under the pointer.',
-      vis: cap('<span class="scr r"><i></i></span>', 'Dock') + cap('<span class="scr r" style="opacity:.55"><i style="opacity:.25"></i></span>', 'Hide automatically') + cap('<span class="scr pill"><i></i></span>', 'Pill') },
+      vis: cap('<span class="scr r"><i></i></span>', 'Dock') + cap('<span class="scr r" style="opacity:.55"><i style="opacity:.25"></i></span>', 'auto hide') + cap('<span class="scr pill"><i></i></span>', 'Pill') },
     { h: 'Attached or detached', p: 'Joined to the screen edge with flared corners like a notch, or floating a little off it.',
       vis: cap('<span class="scr att r"><i></i></span>', 'Attached') + cap('<span class="scr r"><i></i></span>', 'Detached') },
     { h: 'Solid, translucent or Liquid Glass', p: 'Flat paint, a frosted blur of the desktop, or glass that refracts what’s behind it on macOS 26.',
@@ -679,7 +679,7 @@ await loadLenis().catch(() => {
     { h: 'Tints', p: 'Your system accent or one of Apple’s colours, softened so the dock stays calm behind its icons. Light and dark follow macOS.',
       live: true, vis: `<div class="tintvis"><div class="tintdocks"></div><div class="tints" role="group" aria-label="Dock tint">${TINTS.map(([n, c], i) => `<button type="button" class="${n === 'None' ? 'none' : n === 'Accent' ? 'multi' : ''}" style="--c:${c}" aria-label="${n === 'Accent' ? 'System accent' : n}" aria-pressed="${i === 2}"></button>`).join('')}</div></div>` },
     { h: 'Icon size and magnification', p: 'Small, medium or large icons, with Dock-style magnification under the pointer.',
-      vis: `<div class="sizes">${[32, 44, 56].map((s, i) => cap(`<img loading="lazy" src="${BASE}safari.avif" alt="" width="${s * 1.3}" height="${s * 1.3}">`, ['Small', 'Medium', 'Large'][i])).join('')}</div>` },
+      vis: `<div class="sizes">${[32, 44, 56].map((s, i) => cap(`<img loading="lazy" src="${BASE}safari.png" alt="" width="${s * 1.3}" height="${s * 1.3}">`, ['Small', 'Medium', 'Large'][i])).join('')}</div>` },
   ];
   const cust = $('cust');
   CUST.forEach((c) => {
@@ -690,7 +690,7 @@ await loadLenis().catch(() => {
 
   /* tints: a light and a dark dock, retinted by the picker */
   const tintDocks = ['light', 'dark'].map((theme) => {
-    const d = ContextDock.render({ base: BASE, theme, lazy: true, items: ['finder.avif', 'safari.avif', 'music.avif'].map((icon, i) => ({ type: 'app', id: 'tint' + i, icon })) });
+    const d = ContextDock.render({ base: BASE, theme, lazy: true, items: ['finder.png', 'safari.png', 'music.png'].map((icon, i) => ({ type: 'app', id: 'tint' + i, icon })) });
     d.setAttribute('aria-hidden', 'true');
     cust.querySelector('.tintdocks').appendChild(d);
     return d;
@@ -729,14 +729,14 @@ await loadLenis().catch(() => {
 
   // Newest first, minutes ago.
   const samples = () => [
-    { kind: 'text', app: ['Notes', 'notes.avif'], ago: 2, text: 'Standup notes\nShipped the new tint picker.\nClipboard previews are in review.\nNext: filter by type.' },
-    { kind: 'link', app: ['Safari', 'safari.avif'], ago: 6, url: 'https://github.com/sparkle-project/Sparkle', icon: 'github.svg',
+    { kind: 'text', app: ['Notes', 'notes.png'], ago: 2, text: 'Standup notes\nShipped the new tint picker.\nClipboard previews are in review.\nNext: filter by type.' },
+    { kind: 'link', app: ['Safari', 'safari.png'], ago: 6, url: 'https://github.com/sparkle-project/Sparkle', icon: 'github.svg',
       title: 'GitHub - sparkle-project/Sparkle: A software update framework for macOS', detail: 'A software update framework for macOS. Contribute to sparkle-project/Sparkle development by creating an account on GitHub.', site: 'GitHub' },
-    { kind: 'image', app: ['Figma', 'figma.avif'], ago: 14, src: '/assets/context-icon.png', w: 512, h: 512, alt: 'The Context app icon' },
-    { kind: 'text', app: ['Mail', 'mail.avif'], ago: 31, text: 'Thursday at 3 works for me. I’ll send the brief before then so we can go through it together.' },
-    { kind: 'file', app: ['Finder', 'finder.avif'], ago: 48, path: '/Users/you/Documents/Project brief.pdf', size: '248 KB' },
-    { kind: 'text', app: ['Xcode', 'xcode.avif'], ago: 75, text: 'func open() {\n    if window == nil { window = makeWindow() }\n    showWindow(nil)\n}' },
-    { kind: 'text', app: ['Messages', 'messages.avif'], ago: 130, text: 'Running ten minutes late, order me a flat white?' },
+    { kind: 'image', app: ['Figma', 'figma.png'], ago: 14, src: '/assets/context-icon.png', w: 512, h: 512, alt: 'The Context app icon' },
+    { kind: 'text', app: ['Mail', 'mail.png'], ago: 31, text: 'Thursday at 3 works for me. I’ll send the brief before then so we can go through it together.' },
+    { kind: 'file', app: ['Finder', 'finder.png'], ago: 48, path: '/Users/you/Documents/Project brief.pdf', size: '248 KB' },
+    { kind: 'text', app: ['Xcode', 'xcode.png'], ago: 75, text: 'func open() {\n    if window == nil { window = makeWindow() }\n    showWindow(nil)\n}' },
+    { kind: 'text', app: ['Messages', 'messages.png'], ago: 130, text: 'Running ten minutes late, order me a flat white?' },
   ].map((e, i) => ({ ...e, id: 'c' + i, at: Date.now() - e.ago * 60e3 }));
 
   // The same one-line summary, card excerpt and search text as ClipboardEntry.

@@ -11,8 +11,12 @@
   "default_files": 20,
   "directories": {
     "apps/web/public/icons": {
-      "limit": 24,
+      "limit": 28,
       "reason": "Dock and widget brand icons for marketing demos"
+    },
+    "apps/web/public/assets": {
+      "limit": 8,
+      "reason": "Brand mark and marketing icon rasters"
     },
     "docs/assets": {
       "limit": 12,
@@ -29,6 +33,10 @@
     "macos/Tests/ContextCoreTests": {
       "limit": 12,
       "reason": "Core unit tests"
+    },
+    "apps/web/public/assets": {
+      "limit": 8,
+      "reason": "Brand mark and marketing icon rasters"
     }
   }
 }

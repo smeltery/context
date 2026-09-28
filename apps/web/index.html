@@ -6,8 +6,11 @@
 <title>Context — a second dock for your Mac</title>
 <meta name="description" content="Context is a slim second dock for your Mac: apps, links, clipboard history and live widgets for weather, music, system stats and your AI tools.">
 <link rel="canonical" href="https://github.com/smeltery/context">
-<link rel="icon" href="/icon-64.png">
-<link rel="apple-touch-icon" href="/icon-180.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="/icon-64.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
 <meta name="theme-color" content="#ffffff">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Context">
@@ -23,29 +26,13 @@
 
 
 <header class="topbar">
-  <a class="brand" href="#top"><svg class="mark" id="mark" viewBox="0 0 1024 1024" aria-hidden="true" focusable="false">
-    <defs>
-      <linearGradient id="markTile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e8e8ea"/></linearGradient>
-      <linearGradient id="markInk" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#111113"/><stop offset="1" stop-color="#3a3a3c"/></linearGradient>
-      <clipPath id="markClip"><rect width="1024" height="1024" rx="230"/></clipPath>
-    </defs>
-    <g clip-path="url(#markClip)">
-      <rect width="1024" height="1024" fill="url(#markTile)"/>
-      <g fill="url(#markInk)">
-        <path d="M312 280h400c88 0 160 72 160 160v0c0 88-72 160-160 160H452v104c0 22-18 40-40 40h-60c-22 0-40-18-40-40V320c0-22 18-40 40-40zM452 440h248c22 0 40-18 40-40s-18-40-40-40H452v80z"/>
-        <rect x="280" y="680" width="120" height="64" rx="20"/>
-        <rect x="452" y="680" width="120" height="64" rx="20"/>
-        <rect x="624" y="680" width="120" height="64" rx="20"/>
-      </g>
-    </g>
-  </svg>Context</a>
+  <a class="brand" href="#top"><img class="mark" id="mark" src="/assets/context-icon.png" width="28" height="28" alt="" decoding="async" />Context</a>
   <nav class="topnav" id="primaryNav" aria-label="Primary">
     <a href="#shortcuts">Features</a>
     <a href="#custom">Customize</a>
     <a href="#privacy">Privacy</a>
     <a href="#faq">FAQ</a>
-    <a href="#buy">Download</a>
-    <a href="https://github.com/smeltery/context/releases/latest">Download</a>
+    <a href="#download">Download</a>
   </nav>
   <a class="btn btn--small" href="https://github.com/smeltery/context/releases/latest">Get Context</a>
   <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="primaryNav"><i></i><i></i></button>
@@ -138,7 +125,7 @@
           <div class="sc-menubar"><b id="scApp">Finder</b><span>File</span><span>Edit</span><span>View</span><span>Window</span><span class="r">Mon 11:18</span></div>
           <div class="sc-win" id="scWin"><div class="bar"><i></i><i></i><i></i><span class="url">apple.com/mac</span></div><div class="page"><b></b><s style="width:86%"></s><s style="width:70%"></s><div class="img"></div></div></div>
           <div class="sc-dock" id="scDock"></div>
-          <div class="surf sc-card" id="scCard"><div class="hrow"><div><div class="ctitle">Milan</div><div class="mut">Sunny · H 29° L 18°</div></div><div style="font-size:32px;font-weight:300;letter-spacing:-.02em">27°</div></div><div class="hours" style="grid-template-columns:repeat(5,1fr)"><span>12<b>27°</b></span><span>13<b>28°</b></span><span>14<b>29°</b></span><span>15<b>29°</b></span><span>16<b>28°</b></span></div></div>
+          <div class="surf sc-card" id="scCard"><div class="hrow"><div><div class="ctitle">New York</div><div class="mut">Partly sunny · H 70° L 58°</div></div><div style="font-size:32px;font-weight:300;letter-spacing:-.02em">68°</div></div><div class="hours" style="grid-template-columns:repeat(5,1fr)"><span>12<b>66°</b></span><span>13<b>68°</b></span><span>14<b>70°</b></span><span>15<b>70°</b></span><span>16<b>69°</b></span></div></div>
           <div class="sc-hud" id="scHud"></div>
         </div>
         <ol class="sc-steps" id="scSteps" aria-label="What a shortcut does"></ol>
@@ -206,7 +193,7 @@
   <section class="sec" id="privacy" aria-labelledby="priv-h">
     <div class="sec-head">
       <h2 id="priv-h">Private by design.</h2>
-      <p>Context works on your Mac. It contacts Polar to verify your license and checks for app updates. Widget polling runs only while the widget is in use.</p>
+      <p>Context works on your Mac. Optional update checks hit GitHub Releases. Widget polling runs only while the widget is in use.</p>
     </div>
     <dl class="priv">
       <div><dt>No telemetry</dt><dd>There is no analytics endpoint. Stats reads your hardware directly and never terminates processes.</dd></div>
@@ -226,32 +213,31 @@
       <div><dt>What can I put in the dock?</dt><dd>Up to twelve apps, links and widgets. Widgets include clipboard history, weather, a Mini Player, Bluetooth, Stats, AI Usage and AI Activity.</dd></div>
       <div><dt>Does clipboard history survive a restart?</dt><dd>Yes. Text, links and images are saved locally; file entries point to their original files. History keeps up to 200 entries, including the newest 12 copied images. Clear History or removing the Clipboard widget deletes the saved history.</dd></div>
       <div><dt>Can I open things from the keyboard?</dt><dd>Yes. Give any app, link or widget a shortcut from its right-click menu or Settings → Items. Shortcuts work from any app, and Context needs no Accessibility or Input Monitoring access for them.</dd></div>
-      <div><dt>Is Context free?</dt><dd>Yes for personal use under PolyForm Shield. See LICENSE for commercial limits.</dd></div>
+      <div><dt>Is Context free?</dt><dd>Yes. Context is free and open source.</dd></div>
       <div><dt>Does Context read my AI conversations?</dt><dd>No. AI Usage and AI Activity do not read conversations, prompts or generated code. Optional API keys are stored in Context’s own Keychain entry.</dd></div>
       <div><dt>When does Context ask for permissions?</dt><dd>Only when you add a widget that needs them, such as paste access for clipboard history, Location for weather, Bluetooth, Automation for music or Accessibility for Keyboard Cleaner.</dd></div>
     </dl>
   </section>
 
-  <section class="price wrap" id="buy" aria-labelledby="price-h">
-    <h2 id="price-h">Open source. Yours to keep.</h2>
+  <section class="price wrap" id="download" aria-labelledby="download-h">
+    <h2 id="download-h">Download Context.</h2>
     <div class="price-grid">
       <p class="amount">Free</p>
       <div>
         <ul>
-          <li>One payment in USD, no subscription</li>
-          <li>One license for up to 3 Macs</li>
-          <li>Automatic app updates</li>
+          <li>Open source on GitHub</li>
           <li>Every widget included</li>
+          <li>Automatic app updates</li>
           <li>macOS 15 or later</li>
+          <li>Apple silicon and Intel</li>
         </ul>
-        <a class="btn" href="https://github.com/smeltery/context/releases/latest">Get Context</a>
-        <p style="margin-top:16px;font-size:14px;line-height:1.6">Already purchased? <a href="https://github.com/smeltery/context">Find your license or manage your Macs</a>.</p>
-        <p id="download-status" style="margin-top:12px;font-size:14px;line-height:1.6"><a href="https://github.com/smeltery/context/releases/latest">Download Context for Mac</a> · macOS 15 or later · Apple silicon and Intel.</p>
+        <a class="btn" href="https://github.com/smeltery/context/releases/latest">Download for Mac</a>
+        <p id="download-status" style="margin-top:16px;font-size:14px;line-height:1.6"><a href="https://github.com/smeltery/context">View source on GitHub</a></p>
       </div>
     </div>
   </section>
 
-  <footer class="wrap"><span>Context for macOS</span><a href="https://github.com/smeltery/context">License &amp; device management</a><span>Weather data from Apple Weather.</span><span>Made by <a href="https://github.com/smeltery" rel="author">Emanuele Di Pietro</a></span></footer>
+  <footer class="wrap"><span>Context for macOS</span><a href="https://github.com/smeltery/context">Source</a><span>Weather data from Apple Weather.</span><span>Made by <a href="https://github.com/smeltery" rel="author">smeltery</a></span></footer>
 </main>
 
 

@@ -18,13 +18,13 @@
 
   // Eleven items, so a page can add one (the zoom page's temporary Figma) and stay within the app's twelve.
   const DEFAULT = [
-    { type: 'app', id: 'synara', icon: 'synara.avif', name: 'Synara', running: true, href: 'https://www.trysynara.com/' },
-    { type: 'app', id: 'chatgpt', icon: 'chatgpt.avif', name: 'ChatGPT', running: true },
+    { type: 'app', id: 'safari', icon: 'safari.png', name: 'Safari', running: true },
+    { type: 'app', id: 'chatgpt', icon: 'chatgpt.png', name: 'ChatGPT', running: true },
     { type: 'divider' },
     { type: 'link', id: 'github', icon: 'github.svg', name: 'github.com', invert: true },
     { type: 'player', id: 'player', name: 'Mini Player', playing: false },
     { type: 'divider' },
-    { type: 'weather', id: 'weather', temp: 27, name: 'Weather' },
+    { type: 'weather', id: 'weather', temp: 68, name: 'Weather' },
     { type: 'bluetooth', id: 'bluetooth', count: 1, name: 'Bluetooth' },
     { type: 'clipboard', id: 'clipboard', name: 'Clipboard' },
     { type: 'keyboard', id: 'keyboard', name: 'Keyboard Cleaner' },
@@ -45,7 +45,7 @@
     switch (it.type) {
       case 'app': return img(it.icon);
       case 'link': return `<span class="skd-link">${img(it.icon, '')}</span>`;
-      case 'player': return `${img('spotify.avif', 'skd-art')}<span class="skd-play">${it.playing ? PAUSE : PLAY}</span>`;
+      case 'player': return `${img('spotify.png', 'skd-art')}<span class="skd-play">${it.playing ? PAUSE : PLAY}</span>`;
       case 'weather': return `<span class="skd-weather">${SUN}<b>${it.temp}°</b></span>`;
       case 'bluetooth': return `<span class="skd-bt">${BT}<span class="skd-badge">${it.count}</span></span>`;
       case 'clipboard': return `<span class="skd-clip">${img('clipboard.svg', '')}</span>`;
