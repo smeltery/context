@@ -1,0 +1,166 @@
+/* Clipboard: the History window (#clipboard) and the widget card (.cb), both from
+   lateraldock/Sources/Widgets/Clipboard. The window is Liquid Glass (GlassWindow.swift), on the page's
+   own #f5f5f7 tile. */
+.clip-layout { display: grid; gap: 28px; }
+
+.uc .clip-stage {
+  position: relative; isolation: isolate; overflow: hidden; border-radius: 28px; padding: 72px 56px;
+  display: flex; justify-content: center;
+  background: #f5f5f7;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+}
+
+/* Liquid Glass, as the page's material demo draws it: a bright tinted pane that blurs and saturates
+   what is behind, a specular rim, and a soft lift. Rows and pills are glass-on-glass fills. */
+.uc .clip-stage .clip-window {
+  --r: 26px; --pill: 34px; position: relative; z-index: 1; width: 100%; max-width: 780px;
+  border: 0; border-radius: var(--r); padding: 0; overflow: hidden; color: #1d1d1f;
+  background: rgba(250, 250, 252, .5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.8); backdrop-filter: blur(18px) saturate(1.8);
+  box-shadow: inset 1.5px 1.5px 0 rgba(255, 255, 255, .85), inset -1px -1px 0 rgba(255, 255, 255, .45),
+    inset 0 0 24px rgba(255, 255, 255, .35), 0 0 0 .5px rgba(0, 0, 0, .14),
+    0 40px 80px -30px rgba(0, 0, 0, .38), 0 12px 28px -14px rgba(0, 0, 0, .2);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .uc .clip-stage .clip-window { background: rgba(250, 250, 252, .94); }
+}
+.clip-search { display: flex; align-items: center; gap: 12px; padding: 16px 20px 12px; }
+.clip-search input {
+  flex: 1; min-width: 0; margin: 0; padding: 4px 0; border: 0; border-radius: 6px; background: transparent;
+  font: 400 19px/1.3 var(--font); letter-spacing: -.01em; color: var(--ink); -webkit-appearance: none; appearance: none;
+}
+.clip-search input::placeholder { color: var(--ink-3); opacity: 1; }
+.clip-search input::-webkit-search-cancel-button { display: none; }
+.clip-type { position: relative; flex: none; display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); }
+.clip-type svg { width: 14px; height: 14px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; pointer-events: none; }
+.clip-type svg:last-child { width: 10px; height: 10px; stroke-width: 1.8; }
+.clip-type select {
+  margin: 0; padding: 4px 0; border: 0; border-radius: 6px; background: transparent; color: inherit; cursor: pointer;
+  font: 500 13px/1.3 var(--font); -webkit-appearance: none; appearance: none;
+}
+.clip-search input:focus-visible, .clip-type select:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 4px; }
+
+.clip-body { display: grid; grid-template-columns: 240px minmax(0, 1fr); height: 380px; }
+.clip-col { min-height: 0; border-right: 1px solid rgba(0, 0, 0, .08); margin-block: 4px; display: flex; flex-direction: column; }
+.clip-list { position: relative; flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 0 10px 10px; outline: 0; scrollbar-width: none; }
+.clip-list::-webkit-scrollbar { display: none; }
+.clip-day { margin: 0; padding: 5px 10px; font-size: 12px; font-weight: 500; color: var(--ink-2); }
+/* Selection as in ClipboardListRow: a translucent fill with 10px corners. */
+.clip-entry { position: relative; display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 8px; margin-top: 2px; border-radius: 10px; cursor: default; font-size: 13px; }
+.clip-entry:hover { background: rgba(0, 0, 0, .04); }
+.clip-entry[aria-selected="true"] { background: rgba(0, 0, 0, .09); }
+.clip-list:focus-visible .clip-entry[aria-selected="true"] { outline: 2px solid var(--ink); outline-offset: -2px; }
+.clip-entry .clip-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.clip-ok { flex: none; font-size: 11px; font-weight: 500; color: #248a3d; }
+.clip-empty { margin: 0; padding: 12px 20px; color: var(--ink-2); }
+.clip-empty .pill { margin-top: 10px; }
+
+/* Thumbnails, shared with the card: text glyph, favicon, image or file. */
+.clip-thumb { --s: 24px; flex: none; width: var(--s); height: var(--s); display: grid; place-items: center; }
+.clip-thumb.g { border-radius: calc(var(--s) * .26); background: rgba(0, 0, 0, .07); color: var(--ink); }
+.clip-thumb.g svg { width: 56%; height: 56%; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; stroke-linecap: round; }
+.clip-thumb img { display: block; max-width: 100%; max-height: 100%; object-fit: contain; border-radius: calc(var(--s) * .12); }
+.clip-thumb.fav img { width: 86%; height: 86%; border-radius: calc(var(--s) * .2); }
+.clip-thumb.doc svg { height: 100%; width: auto; filter: drop-shadow(0 .5px .5px rgba(0, 0, 0, .15)); }
+
+/* Detail: preview on top, Information below. */
+.clip-detail { min-width: 0; min-height: 0; display: flex; flex-direction: column; gap: 14px; padding: 4px 16px 0; }
+.clip-preview { position: relative; flex: 1 1 0; min-height: 120px; }
+.clip-preview > * { position: absolute; inset: 0; margin: 0; }
+.clip-text { margin: 0; padding: 14px; overflow: auto; border-radius: 14px; background: rgba(0, 0, 0, .05); line-height: 1.55; white-space: pre-wrap; overflow-wrap: anywhere; }
+.clip-image, .clip-file { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; padding: 4px 12px 12px; }
+.clip-image img, .clip-file svg { display: block; max-width: 100%; max-height: 100%; border-radius: 14px; box-shadow: 0 3px 16px rgba(0, 0, 0, .18); }
+.clip-file svg { height: min(100%, 132px); width: auto; border-radius: 0; box-shadow: none; filter: drop-shadow(0 3px 8px rgba(0, 0, 0, .16)); }
+.clip-link { display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; padding: 18px; border-radius: 14px; background: rgba(0, 0, 0, .05); overflow: hidden; }
+.clip-link img { width: 36px; height: 36px; border-radius: 8px; }
+.clip-link b { font-size: 17px; line-height: 1.25; font-weight: 600; letter-spacing: -.01em; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.clip-link span { color: var(--ink-2); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.clip-link small { font-size: 11px; font-weight: 500; color: var(--ink-3); }
+.clip-info-h { margin: 0 0 6px 10px; font-size: 12px; font-weight: 500; color: var(--ink-2); }
+.clip-info dl { margin: 0; border-radius: 10px; overflow: hidden; font-size: 12px; }
+.clip-info dl > div { display: flex; align-items: center; gap: 12px; padding: 6px 12px; }
+.clip-info dl > div:nth-child(odd) { background: rgba(0, 0, 0, .05); }
+.clip-info dt { flex: none; color: var(--ink-2); }
+.clip-info dd { flex: 1; min-width: 0; margin: 0; display: flex; justify-content: flex-end; align-items: center; gap: 6px; }
+.clip-info dd span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.clip-info dd img { width: 16px; height: 16px; flex: none; }
+
+/* Footer: glass capsules, inset by the window radius less half their height so their ends share its corners' centres. */
+.clip-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px calc(var(--r) - var(--pill) / 2) calc(var(--r) - var(--pill) / 2); }
+.clip-pill {
+  display: inline-flex; align-items: center; height: var(--pill); border-radius: 999px; background: rgba(255, 255, 255, .55);
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, .95), inset -.5px -.5px 0 rgba(255, 255, 255, .6), 0 0 0 .5px rgba(0, 0, 0, .1), 0 2px 8px -2px rgba(0, 0, 0, .12);
+}
+.clip-name-pill { gap: 8px; padding: 0 13px 0 7px; font-weight: 500; white-space: nowrap; }
+.clip-name-pill img { width: 20px; height: 20px; }
+.clip-name-pill .tnum { font-size: 11px; color: var(--ink-2); }
+.clip-actions { gap: 2px; padding: 0 3px; }
+.clip-actions > i { width: 1px; height: 16px; background: rgba(0, 0, 0, .15); }
+.clip-actions button {
+  all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 9px;
+  border-radius: 999px; font-weight: 500; cursor: pointer; white-space: nowrap;
+}
+.clip-actions button:hover { background: rgba(0, 0, 0, .05); }
+.clip-actions button:focus-visible { outline: 2px solid var(--ink); outline-offset: 0; }
+.clip-actions button:disabled { opacity: .4; cursor: default; background: none; }
+.clip-keys { display: inline-flex; gap: 3px; }
+.clip-keys kbd { display: inline-grid; place-items: center; min-width: 18px; height: 18px; padding: 0 3px; box-sizing: border-box; border-radius: 4.5px; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .22); font: 500 10px/1 var(--font); color: var(--ink-2); }
+
+.clip-notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 40px; }
+.clip-notes h3 { margin: 0 0 6px; font-size: 19px; font-weight: 600; letter-spacing: -.015em; }
+.clip-notes p { margin: 0; color: var(--ink-2); font-size: 15.5px; }
+.clip-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Widget card */
+.uc .cb-rows { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 2px; }
+.uc .cb-row { position: relative; display: flex; align-items: center; border-radius: 8px; }
+.uc .cb-row:hover, .uc .cb-row:focus-within { background: #f5f5f7; }
+.uc .cb-copy { all: unset; box-sizing: border-box; flex: 1; min-width: 0; display: flex; align-items: center; gap: 10px; padding: 4px 6px; border-radius: 8px; cursor: pointer; }
+.uc .cb-copy .clip-thumb { --s: 28px; }
+.uc .cb-copy > span:last-child { min-width: 0; display: grid; gap: 1px; }
+.uc .cb-prev { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-line; overflow-wrap: anywhere; }
+.uc .cb-time { font-size: 11px; }
+.uc .cb-time.ok { color: #248a3d; }
+.uc .cb-x { all: unset; flex: none; width: 18px; height: 18px; margin-right: 6px; display: grid; place-items: center; border-radius: 5px; color: var(--ink-2); cursor: pointer; visibility: hidden; }
+.uc .cb-x svg { width: 9px; height: 9px; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+.uc .cb-x:hover { color: var(--ink); background: rgba(0, 0, 0, .06); }
+.uc .cb-row:hover .cb-x, .uc .cb-row:focus-within .cb-x { visibility: visible; }
+.uc .cb-copy:focus-visible, .uc .cb-x:focus-visible, .uc .cb-all:focus-visible { outline: 2px solid var(--ink); outline-offset: -2px; }
+.uc .cb-foot { margin-top: 10px; font-size: 11px; }
+.uc .cb-all { color: var(--ink-2); text-decoration: none; border-radius: 4px; }
+.uc .cb-all:hover { color: var(--ink); }
+.uc .cb-empty { margin: 10px 0 0; color: var(--ink-2); }
+@media (hover: none) {
+  .uc .cb-x { visibility: visible; }
+}
+
+@media (max-width: 1000px) {
+  .uc .clip-stage { padding: 48px 28px; }
+  .clip-notes { gap: 24px; }
+  .clip-body { grid-template-columns: 220px minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .uc .clip-stage { padding: 20px 10px; border-radius: 22px; }
+}
+@media (max-width: 560px) {
+  .clip-search { padding: 14px 14px 10px; }
+  .clip-search input { font-size: 17px; }
+  .clip-body { grid-template-columns: minmax(0, 1fr); height: auto; }
+  .clip-col { border-right: 0; border-bottom: 1px solid rgba(0, 0, 0, .08); margin: 0 0 12px; }
+  .clip-list { height: 216px; flex: none; padding-inline: 8px; }
+  .clip-detail { padding: 0 12px; }
+  .clip-preview { flex: none; height: 160px; }
+  .clip-footer { flex-wrap: wrap; justify-content: flex-start; }
+  .clip-actions { flex-basis: 100%; justify-content: space-between; }
+  .clip-actions > i { display: none; }
+  .clip-notes { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .uc .clip-stage .clip-window { --r: 22px; --pill: 32px; }
+}
+/* iOS zooms into form fields under 16px. */
+@media (hover: none) and (pointer: coarse) {
+  .clip-search input, .clip-type select { font-size: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .clip-list { scroll-behavior: auto; }
+}
+

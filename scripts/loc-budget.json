@@ -1,9 +1,8 @@
 {
   "default_lines": 250,
   "files": {
-    "apps/web/src/main.ts": 1000,
-    "apps/web/src/styles.css": 2200,
     "apps/web/src/dock.ts": 120,
+    "apps/web/src/hero-zoom.ts": 270,
     "apps/web/index.html": 320,
     "macos/Sources/Context/DockWindowController.swift": 280,
     "macos/Sources/Context/DockView.swift": 280
@@ -33,10 +32,6 @@
     "macos/Tests/ContextCoreTests": {
       "limit": 12,
       "reason": "Core unit tests"
-    },
-    "apps/web/public/assets": {
-      "limit": 8,
-      "reason": "Brand mark and marketing icon rasters"
     }
   }
 }

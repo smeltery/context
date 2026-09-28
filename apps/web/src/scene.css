@@ -1,0 +1,98 @@
+/* Front-on MacBook Pro: silver aluminium, a rounded chassis and rubber feet. Shared by the home page and /download.
+   Everything sits in em inside a 1720em x 1046em .world, so a page scales it with .world's font-size. */
+.lid {
+  position: absolute; left: 104em; top: 0; width: 1512em; height: 982em;
+  padding: 4em; border-radius: 43em 43em 8em 8em;
+  background: linear-gradient(100deg, #8f9195, #f2f3f4 1%, #b9bbc0 3%, #dadce0 48%, #a0a2a7 97%, #e7e9eb 99%, #8e9094);
+  box-shadow: 0 0 0 1.5em #8b8d91, inset 0 2em 1em #fafbfc, inset 0 -2em 1em #717378;
+}
+.lid::after {
+  content: ""; position: absolute; inset: 3em; border-radius: 40em 40em 6em 6em;
+  pointer-events: none; border: 1em solid rgba(255, 255, 255, .13);
+}
+.bezel {
+  position: relative; height: 100%; padding: 14em 14em 20em;
+  border-radius: 39em 39em 5em 5em; background: #050506;
+  box-shadow: inset 0 0 0 1em #171819;
+}
+.display {
+  position: relative; width: 100%; height: 100%; border-radius: 20em 20em 3em 3em; overflow: hidden;
+  background: #fff;
+}
+.notch {
+  position: absolute; z-index: 3; left: 50%; top: 0; width: 200em; height: 32em; transform: translateX(-50%);
+}
+/* One continuous outline avoids seams between the concave shoulders and body. */
+.notch-shape { display: block; width: 100%; height: 100%; fill: #050506; }
+.notch i { position: absolute; left: 50%; top: 12em; width: 8em; height: 8em; margin-left: -4em; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #3a3f46 0 22%, #121418 45%, #0b0b0c 70%); }
+.hinge {
+  position: absolute; left: 118em; top: 970em; width: 1484em; height: 20em;
+  background: linear-gradient(180deg, #050506, #292a2b 55%, #080809);
+}
+.base {
+  position: absolute; z-index: 2; left: 0; top: 982em; width: 1720em; height: 55em;
+  border-radius: 5em 5em 30em 30em / 5em 5em 22em 22em;
+  background:
+    linear-gradient(90deg, #777a80 0%, #d7d9dd .6%, #fafbfc 1%, #a3a6ab 1.7%, transparent 3.2%, transparent 96.8%, #a4a7ad 98.3%, #f6f7f8 99%, #c3c6ca 99.5%, #74777d),
+    linear-gradient(180deg, #f9fafb 0%, #e7e9ec 3%, #c5c8cd 9%, #d3d6da 32%, #dddfe2 53%, #bfc2c7 73%, #878b91 94%, #bec1c6 100%);
+  box-shadow: inset 0 1em 0 #fff, inset 0 -2em 2em #8e9298, 0 1em 1em rgba(0,0,0,.2);
+}
+.base::before {
+  content: ""; position: absolute; left: 50%; top: 0; width: 292em; height: 22em; transform: translateX(-50%);
+  border-radius: 0 0 16em 16em / 0 0 18em 18em;
+  background: linear-gradient(90deg, #73777d, #c4c7cc 5%, transparent 12%, transparent 88%, #b9bdc3 96%, #70747a), linear-gradient(180deg, #969aa1, #d2d5da 65%, #e6e8eb 86%, #a9adb4);
+  box-shadow: 0 1em 1em #969aa0, inset 0 1.5em 2em rgba(0,0,0,.3);
+}
+.base::after {
+  content: ""; position: absolute; left: 35em; right: 35em; bottom: 5em; height: 1.5em;
+  background: linear-gradient(90deg, transparent, #8b8f96 8%, #d3d6db 48%, #8a8e95 92%, transparent);
+}
+.feet { position: absolute; left: 115em; right: 115em; top: 1032em; height: 13em; }
+.feet::before, .feet::after { content: ""; position: absolute; width: 104em; height: 13em; border-radius: 0 0 17em 17em / 0 0 10em 10em; background: linear-gradient(#111213, #292a2b 60%, #090a0b); box-shadow: 0 2em 2em rgba(0,0,0,.18); }
+.feet::before { left: 0; } .feet::after { right: 0; }
+.shadow { position: absolute; left: 18em; right: 18em; top: 1028em; height: 22em; border-radius: 50%; background: radial-gradient(ellipse, rgba(15,16,18,.24), rgba(15,16,18,.1) 48%, transparent 72%); filter: blur(5em); }
+.menubar {
+  position: absolute; left: 0; right: 0; top: 0; height: 32em;
+  display: flex; align-items: center; justify-content: space-between; padding: 0 14em;
+  background: rgba(255, 255, 255, .7);
+}
+.menubar span { font: 13em/1 var(--sans); color: #1d1d1f; white-space: nowrap; }
+.menubar .l, .menubar .r { display: flex; align-items: center; gap: 18em; }
+.menubar b { font-weight: 700; }
+.world .skd { font-size: 1em; position: absolute; right: 8em; top: calc(50% + 16em); transform: translateY(-50%); }
+.macdock {
+  position: absolute; left: 50%; bottom: 6em; transform: translateX(-50%);
+  display: flex; align-items: center; padding: 5em 6em; border-radius: 20em;
+  background: rgba(255, 255, 255, .55); box-shadow: inset 0 0 0 1em rgba(255, 255, 255, .8), 0 0 0 .5em rgba(0, 0, 0, .08), 0 10em 30em -10em rgba(0, 0, 0, .2);
+}
+.macdock img { width: 54em; height: 54em; display: block; }
+.macdock i { width: 1em; height: 40em; background: rgba(0, 0, 0, .18); margin: 0 6em; }
+
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+.lenis.lenis-autoToggle {
+  transition-property: overflow;
+  transition-duration: 1ms;
+  transition-behavior: allow-discrete;
+}
+
