@@ -13,6 +13,10 @@
 
 A second dock for your Mac — apps, links, clipboard history, and live widgets on the screen edge.
 
+<p align="center">
+  <img src="docs/assets/context-hero.png" width="720" alt="Context on a MacBook — a second dock on the screen edge">
+</p>
+
 ## Quick start
 
 ```bash
