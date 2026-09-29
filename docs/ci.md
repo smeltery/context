@@ -23,8 +23,8 @@ flowchart TD
 
 | Job | Runner | What it runs |
 |-----|--------|--------------|
-| `docs` | Blacksmith Ubuntu | flox activate, `check-docs.sh`, `check-hygiene.sh` |
-| `verify` | Blacksmith Ubuntu | `check-node.sh` |
-| `macos` | Blacksmith macOS 15 | Swift build + smoke (+ `swift test` when Xcode exists) |
+| `docs` | GitHub-hosted Ubuntu | flox activate, `check-docs.sh`, `check-hygiene.sh` |
+| `verify` | GitHub-hosted Ubuntu | `check-node.sh` |
+| `macos` | GitHub-hosted macOS 15 | Swift build + smoke (+ `swift test` when Xcode exists) |
 
 Flox is installed in Linux jobs so the same `manifest.toml` tools used locally are proven in CI. Bun 1.4.2 is also set up via `oven-sh/setup-bun` so the lockfile version is exact even if the catalog lags.
