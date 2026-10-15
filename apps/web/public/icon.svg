@@ -1,24 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
-  <defs>
-    <linearGradient id="markTile" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#e0e0e0"/></linearGradient>
-    <linearGradient id="markBody" x1="0" y1="0" x2=".55" y2="1"><stop offset="0" stop-color="#0b0b0c"/><stop offset="1" stop-color="#2e2e30"/></linearGradient>
-    <clipPath id="markClip"><rect width="1024" height="1024" rx="230"/></clipPath>
-    <mask id="markEyes" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="1200">
-      <rect width="1200" height="1200" fill="#fff"/>
-      <ellipse cx="602" cy="430" rx="48" ry="72" fill="#000" transform="rotate(-16 602 430)"/>
-      <ellipse cx="760" cy="545" rx="56" ry="88" fill="#000" transform="rotate(-6 760 545)"/>
-    </mask>
-  </defs>
-  <g clip-path="url(#markClip)">
-    <rect width="1024" height="1024" fill="url(#markTile)"/>
-    <path fill="url(#markBody)" mask="url(#markEyes)" d="
-      M1080,-60
-      C1010,-40 940,20 880,90
-      C820,170 760,230 680,290
-      C600,350 530,420 490,520
-      C455,610 450,700 480,780
-      C520,880 600,950 710,990
-      C800,1020 900,1035 1080,1045
-      L1080,1100 L1200,1100 L1200,-100 Z"/>
-  </g>
+  <title>Context — edge and tile</title>
+  <rect width="1024" height="1024" rx="230" fill="#181818"/>
+  <rect x="640" y="240" width="112" height="544" rx="56" fill="#ffffff"/>
+  <rect x="288" y="384" width="256" height="256" rx="64" fill="#ffffff"/>
 </svg>

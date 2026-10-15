@@ -7,7 +7,7 @@ cd "$root"
 FONT_SB="${INTER_SEMIBOLD:-$HOME/Library/Fonts/Inter-SemiBold.ttf}"
 FONT_MD="${INTER_MEDIUM:-$HOME/Library/Fonts/Inter-Medium.ttf}"
 FONT_RG="${INTER_REGULAR:-$HOME/Library/Fonts/Inter-Regular.ttf}"
-CREATURE="apps/web/public/assets/context-creature.png"
+ICON="apps/web/public/icon.svg"
 OUT="apps/web/public/og-context.png"
 WORK="$(mktemp -d -t og-context)"
 trap 'rm -rf "$WORK"' EXIT
@@ -18,37 +18,19 @@ if [[ ! -f "$FONT_SB" || ! -f "$FONT_MD" || ! -f "$FONT_RG" ]]; then
 fi
 command -v magick >/dev/null || { echo "error: ImageMagick (magick) required" >&2; exit 1; }
 
+command -v rsvg-convert >/dev/null || { echo "error: librsvg (rsvg-convert) required" >&2; exit 1; }
+
 W=1200
 H=630
 LOGO_SIZE=220
-RADIUS=49
 
 magick -size "${W}x${H}" \
   radial-gradient:"#ffffff-#e4e4e7" \
   -gravity center -extent "${W}x${H}" \
   "$WORK/bg.png"
 
-# Creature asset is soft-alpha gray; harden to opaque black silhouette and trim padding.
-magick "$CREATURE" -alpha extract -threshold 12% \
-  -background black -alpha shape \
-  -trim +repage \
-  "$WORK/creature.png"
-
-# Light squircle + creature flush to the right/bottom edge. No shadow.
-magick -size "${LOGO_SIZE}x${LOGO_SIZE}" xc:"#f0f0f0" \
-  \( -size "${LOGO_SIZE}x${LOGO_SIZE}" xc:black -fill white \
-     -draw "roundrectangle 0,0 $((LOGO_SIZE - 1)),$((LOGO_SIZE - 1)) ${RADIUS},${RADIUS}" \) \
-  -alpha off -compose CopyOpacity -composite \
-  \( "$WORK/creature.png" -resize x250 \) \
-  -gravity southeast -geometry -12-4 -compose over -composite \
-  "$WORK/logo.png"
-
-# Clip creature overflow to the squircle.
-magick "$WORK/logo.png" \
-  \( -size "${LOGO_SIZE}x${LOGO_SIZE}" xc:black -fill white \
-     -draw "roundrectangle 0,0 $((LOGO_SIZE - 1)),$((LOGO_SIZE - 1)) ${RADIUS},${RADIUS}" \) \
-  -alpha off -compose CopyOpacity -composite \
-  "$WORK/logo.png"
+# Render the same vector source used by the website and favicon exports.
+rsvg-convert --width "$LOGO_SIZE" --height "$LOGO_SIZE" "$ICON" --output "$WORK/logo.png"
 
 CLUSTER_W=$((LOGO_SIZE + 48 + 440))
 CLUSTER_LEFT=$(( (W - CLUSTER_W) / 2 ))
